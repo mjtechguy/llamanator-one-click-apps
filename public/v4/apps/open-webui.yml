@@ -1,0 +1,29 @@
+captainVersion: 4
+services:
+    $$cap_appname:
+        image: ghcr.io/open-webui/open-webui:$$cap_openwebui_version
+        volumes:
+            - $$cap_appname-data:/app/backend/data
+        restart: always
+        environment:
+            OLLAMA_API_BASE_URL: http://ollama:11434/api
+        caproverExtra:
+            containerHttpPort: 8080
+caproverOneClickApp:
+    variables:
+        - id: $$cap_openwebui_version
+          label: Open WebUI Version
+          defaultValue: 'main'
+          description: Check out their Docker page for the valid tags https://github.com/open-webui/open-webui/pkgs/container/open-webui
+          validRegex: /^([^\s^\/])+$/
+    instructions:
+        start: >-
+            Open WebUI ChatGPT-Style Web Interface for Ollama.
+        end: >
+            Open WebUI is deployed and available as $$cap_appname. 
+
+            IMPORTANT: It will take up to 2 minutes for Open WebUI to be ready. Before that, you might see a 502 error page.
+    displayName: Open WebUI
+    isOfficial: false
+    description: ChatGPT-Style Web Interface for Ollama
+    documentation: Taken from https://github.com/open-webui/open-webui.
